@@ -12,10 +12,10 @@ const rateLimitMiddleware = require('./Middleware/RateLimiter');
 const tooBusy = require('toobusy-js');
 const buildLogger = require('./Logger/ProdLogger');
 const logger = buildLogger();
+const MemoryStore = require('memorystore')(session);
 
 const connectDB = require('./Config/dbConnection');
 const LogErrors = require('./Middleware/LogErrors');
-const { isValidUsername } = require('./Logic/Checker');
 
 connectDB();
 
@@ -26,7 +26,11 @@ app.use(cookieParser());
 app.use(session({
     secret: process.env.SESSION_SECRET_KEY,
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: { maxAge: 86400000 },
+    store: new MemoryStore({
+      checkPeriod: 86400000 // prune expired entries every 24h
+    }),
 }));
 app.use(helmet());
 app.use(passport.initialize());
