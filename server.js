@@ -21,7 +21,7 @@ connectDB();
 
 //app.set('trust proxy', true);
 
-app.use(cors({ origin: ['https://main--dynamic-mousse-7027f8.netlify.app', 'http://localhost:3000'], credentials: true, allowedHeaders: ['Content-Type', 'Authorization', 'authorization'] }));
+app.use(cors({ origin: ['https://dynamic-mousse-7027f8.netlify.app'], credentials: true, allowedHeaders: ['Content-Type', 'Authorization', 'authorization'] }));
 app.use(cookieParser());
 app.use(session({
     secret: process.env.SESSION_SECRET_KEY,
@@ -44,11 +44,6 @@ app.use(function (req, res, next) {
     } else {
         next();
     }
-});
-app.use((req, res, next) => {
-    //if(req.cookies) req.headers["csrf-token"] = req.cookies.csrf_token; 
-    console.log("csrf token: ", req.cookies.csrf_token);
-    next();
 });
 app.use("/user", require("./Routes/UserRouter"));
 app.use("/profile", require("./Routes/ProfileRouter"));
