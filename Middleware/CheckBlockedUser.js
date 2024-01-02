@@ -1,7 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const User = require('../Data/UserModel');
 const Admin = require('../Data/AdminModel');
-const { default: mongoose } = require('mongoose');
+const mongoose = require('mongoose');
 
 const checkBlockedUsers = asyncHandler(async(req, res, next) => {
 
@@ -31,7 +31,7 @@ const checkBlockedUsers = asyncHandler(async(req, res, next) => {
 
         const obj = {blocked_user_id: user._id};
 
-        await Admin.update({ blocked_users_ids: obj }, { $pull: { blocked_users_ids: obj } });
+        await Admin.updateOne({ blocked_users_ids: obj }, { $pull: { blocked_users_ids: obj } });
         
     };
 
@@ -39,4 +39,4 @@ const checkBlockedUsers = asyncHandler(async(req, res, next) => {
 
 });
 
-module.exports = checkBlockedUsers;
+module.exports = {checkBlockedUsers};
