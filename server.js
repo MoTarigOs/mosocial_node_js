@@ -19,7 +19,7 @@ const LogErrors = require('./Middleware/LogErrors');
 
 connectDB();
 
-//app.set('trust proxy', true);
+app.set('trust proxy', true);
 
 app.use(cors({ origin: ['https://motarigos.github.io/mosocial/*', 'https://motarigos.github.io', 'http://localhost:3000'], credentials: true, allowedHeaders: ['Content-Type', 'Authorization', 'authorization'] }));
 app.use(cookieParser());
@@ -37,19 +37,19 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded( { extended: false })); 
 app.use(express.json({ limit: "10kb" }));
-// app.use(rateLimitMiddleware);
-// app.use(function (req, res, next) {
-//     if(tooBusy()){
-//         return res.status(503).send("The server is too busy, please try again after a moment");
-//     } else {
-//         next();
-//     }
-// });
-// app.use((req, res, next) => {
-//     //if(req.cookies) req.headers["csrf-token"] = req.cookies.csrf_token; 
-//     console.log("csrf token: ", req.cookies.csrf_token);
-//     next();
-// });
+app.use(rateLimitMiddleware);
+app.use(function (req, res, next) {
+    if(tooBusy()){
+        return res.status(503).send("The server is too busy, please try again after a moment");
+    } else {
+        next();
+    }
+});
+app.use((req, res, next) => {
+    //if(req.cookies) req.headers["csrf-token"] = req.cookies.csrf_token; 
+    console.log("csrf token: ", req.cookies.csrf_token);
+    next();
+});
 // app.use("/user", require("./Routes/UserRouter"));
 // app.use("/profile", require("./Routes/ProfileRouter"));
 // app.use("/post", require("./Routes/PostRouter"));
@@ -59,20 +59,20 @@ app.use(express.json({ limit: "10kb" }));
 // app.use("/report", require("./Routes/ReportRouter"));
 // app.use("/admin", require("./Routes/AdminRouter"));
 
-// app.disable('x-powered-by');
+app.disable('x-powered-by');
 
-// app.use(LogErrors);
+app.use(LogErrors);
 
-// process.on("uncaughtException", (err) => {
+process.on("uncaughtException", (err) => {
 
-//     const errMsg = err.stack.toString().replaceAll(/[\n\r]/g, '');
+    const errMsg = err.stack.toString().replaceAll(/[\n\r]/g, '');
 
-//     logger.error(errMsg, () => {
-//         mongoose.disconnect();
-//         process.exit(0);
-//     });
+    logger.error(errMsg, () => {
+        mongoose.disconnect();
+        process.exit(0);
+    });
 
-// });
+});
 
 mongoose.connection.once('open', () => {
     app.listen(PORT, () => {
