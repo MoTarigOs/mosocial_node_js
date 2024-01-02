@@ -19,7 +19,7 @@ const LogErrors = require('./Middleware/LogErrors');
 
 connectDB();
 
-app.set('trust proxy', true);
+//app.set('trust proxy', true);
 
 app.use(cors({ origin: ['https://motarigos.github.io/mosocial/*', 'https://motarigos.github.io', 'http://localhost:3000'], credentials: true, allowedHeaders: ['Content-Type', 'Authorization', 'authorization'] }));
 app.use(cookieParser());
@@ -51,13 +51,13 @@ app.use((req, res, next) => {
     next();
 });
 app.use("/user", require("./Routes/UserRouter"));
-// app.use("/profile", require("./Routes/ProfileRouter"));
+app.use("/profile", require("./Routes/ProfileRouter"));
 // app.use("/post", require("./Routes/PostRouter"));
 // app.use("/comments", require("./Routes/CommentsRouter"));
 // app.use("/chat", require("./Routes/ChatRouter"));
 // app.use("/contacts", require("./Routes/ContactRouter"));
 app.use("/report", require("./Routes/ReportRouter"));
-// app.use("/admin", require("./Routes/AdminRouter"));
+app.use("/admin", require("./Routes/AdminRouter"));
 
 app.disable('x-powered-by');
 
