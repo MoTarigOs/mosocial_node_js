@@ -1,22 +1,12 @@
 const validator = require('validator');
-const { isValidUsername } = require('./Logic/Checker');
+const { isValidUsername, isValidEmail, isValidText } = require('./Logic/Checker');
 
 
 const testChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@$ !_*&%?";
-const url = "http://x.xx.xx"
+const sample = "2MBUKH";
 
-const isSecuredContact = (name_of_app, url) => {
+console.log("is valid sample? ", sample, " :", isValidText(sample));
 
-    if(!validator.isURL(url)) return false;
-    
-    return true;
-};
-
-console.log("is valid contact url? ", url, " :", isSecuredContact(null, url));
-
-const method = async() => {
-    console.log("is valid text? ", username, " :", await isValidUsername(username));
-}
 
 //method()
 // sanitize(melicousString);

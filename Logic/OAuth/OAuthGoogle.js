@@ -63,8 +63,6 @@ router.get('/callback',
         if(!userExist?.oauth || userExist.oauth === false)
             return res.status(403).json({ message: "error logging to your account, please login using password" });
 
-        console.log("userExist: ", userExist);    
-
         if(userExist.isBlocked){
 
             const elabsed = Date.now() - userExist.blocked.date_of_block;
@@ -91,7 +89,7 @@ router.get('/callback',
             user: {
                 username: userExist.username,
                 email: userExist.email,
-                id: userExist.id
+                id: userExist._id
             }
         },process.env.ACCESS_TOKEN_SECRET,
         { expiresIn: "5d" }
@@ -101,15 +99,11 @@ router.get('/callback',
             user: {
                 username: userExist.username,
                 email: userExist.email,
-                id: userExist.id
+                id: userExist._id
             }
         },process.env.REFRESH_TOKEN_SECRET,
         { expiresIn: "30d" }
         );
-
-        console.log("Email: ", userExist.email);
-        console.log("Access token: ", userAccessToken);
-        console.log("Refresh token: ", userRefreshToken);
 
         const updateWL = await updateWhiteListAccessToken(userExist.email, userAccessToken, userRefreshToken);
     
@@ -129,12 +123,13 @@ router.get('/callback',
                 maxAge: (30 * 24 * 60 * 60 * 1000)
             });
             res.status(200);
-            res.redirect(301, 'https://motarigos.github.io/mosocial/'); //https://motarigos.github.io/mosocial/   ,  http://localhost:3000/
+            res.redirect(301, `https://dynamic-mousse-7027f8.netlify.app/profile/${userExist._id}`); //https://motarigos.github.io/mosocial/   ,  http://localhost:3000/
         } else {
-            res.status(501).json({message: "We are sorry something went wrong!, please try login again"})
+            res.status(501).json({message: "We are sorry something went wrong!, please try login again"});
             res.clearCookie('_a_t');
             res.clearCookie('_r_t');
-            res.redirect(301, 'https://motarigos.github.io/mosocial/');
+            res.clearCookie('csrf_token');
+            res.redirect(301, 'https://dynamic-mousse-7027f8.netlify.app/sign');
         }
     
     })

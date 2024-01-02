@@ -21,7 +21,7 @@ connectDB();
 
 //app.set('trust proxy', true);
 
-app.use(cors({ origin: ['https://main--dynamic-mousse-7027f8.netlify.app'], credentials: true, allowedHeaders: ['Content-Type', 'Authorization', 'authorization'] }));
+app.use(cors({ origin: ['https://main--dynamic-mousse-7027f8.netlify.app', 'http://localhost:3000'], credentials: true, allowedHeaders: ['Content-Type', 'Authorization', 'authorization'] }));
 app.use(cookieParser());
 app.use(session({
     secret: process.env.SESSION_SECRET_KEY,

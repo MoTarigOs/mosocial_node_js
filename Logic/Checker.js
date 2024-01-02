@@ -5,7 +5,7 @@ const testChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345678
 
 const isValidPassword = (ps) => {
 
-    if(typeof ps !== "string" || ps.length < 8 || password.length > 30) return false;
+    if(typeof ps !== "string" || ps.length < 8 || ps.length > 30) return false;
 
     for (let i = 0; i < ps.length; i++) {
 

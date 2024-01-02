@@ -106,8 +106,6 @@ const sendCodeToEmail = asyncHandler( async(req, res) => {
 
     const { email } = req.body;
 
-    console.log("email: ", email);
-
     if(!email || email.length <= 0) return res.status(403).send("No email found");
 
     /* check email availability */
@@ -116,8 +114,6 @@ const sendCodeToEmail = asyncHandler( async(req, res) => {
         return res.status(403).send("Enter valid email :)");
 
     const code = generateRandomCode();
-
-    console.log("Verification Code: ", code);
 
     const sendEmailRes = await sendToEmail(code, email, process.env.GMAIL_ACCOUNT, process.env.GMAIL_APP_PASSWORD);
 
@@ -149,7 +145,7 @@ const verifyEmail = asyncHandler( async(req, res) => {
 
     if(!isValidEmail(email)) return res.status(400).send("please enter valid email");
 
-    if(!!isValidText(eCode)) return res.status(400).send("please enter valid verification code");
+    if(!isValidText(eCode)) return res.status(400).send("please enter valid verification code");
 
     const verCode = await VerCode.findOne({ email: email, code: eCode });
 

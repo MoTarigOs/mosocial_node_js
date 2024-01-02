@@ -37,7 +37,7 @@ const sendMessage = asyncHandler( async(req, res) => {
 
     if(!contact){
         const notif = {
-            notif_sender_username: sender_username ? sender_username : req.user.username,
+            notif_sender_username: req.user.username,
             notif_sender_id: req.user.id
         };
 
