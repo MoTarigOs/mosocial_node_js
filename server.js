@@ -50,14 +50,8 @@ app.use((req, res, next) => {
     console.log("csrf token: ", req.cookies.csrf_token);
     next();
 });
-app.use("/user", require("./Routes/UserRouter"));
-app.use("/profile", require("./Routes/ProfileRouter"));
-app.use("/post", require("./Routes/PostRouter"));
-app.use("/comments", require("./Routes/CommentsRouter"));
-// app.use("/chat", require("./Routes/ChatRouter"));
-// app.use("/contacts", require("./Routes/ContactRouter"));
-// app.use("/report", require("./Routes/ReportRouter"));
-// app.use("/admin", require("./Routes/AdminRouter"));
+
+app.use(require('./Routes/MainRouter'));
 
 app.disable('x-powered-by');
 
