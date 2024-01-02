@@ -52,8 +52,8 @@ app.use((req, res, next) => {
 });
 app.use("/user", require("./Routes/UserRouter"));
 app.use("/profile", require("./Routes/ProfileRouter"));
-// app.use("/post", require("./Routes/PostRouter"));
-// app.use("/comments", require("./Routes/CommentsRouter"));
+app.use("/post", require("./Routes/PostRouter"));
+app.use("/comments", require("./Routes/CommentsRouter"));
 app.use("/chat", require("./Routes/ChatRouter"));
 app.use("/contacts", require("./Routes/ContactRouter"));
 app.use("/report", require("./Routes/ReportRouter"));

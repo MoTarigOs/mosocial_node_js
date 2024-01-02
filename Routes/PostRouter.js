@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const verifyJWT = require("../Middleware/VerifyJWT");
+const verifyJWT = require("../Middleware/VerifyJWT.JS");
 const { createPost, getAllPostsByID, getPosts, likePost, removeLikePost, deletePost, getPostDetails } = require("../Controllers/PostController");
 const LogEvents = require("../Middleware/LogEvents");
 const { csrfProtection } = require("../Controllers/UserController");

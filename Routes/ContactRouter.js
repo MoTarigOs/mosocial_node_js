@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const verifyJWT = require("../Middleware/VerifyJWT");
+const verifyJWT = require("../Middleware/VerifyJWT.JS");
 const { createContact, getContacts, deleteContact, updateContact } = require("../Controllers/ContactController");
 const LogEvents = require("../Middleware/LogEvents");
 const {checkBlockedUsers} = require("../Middleware/CheckBlockedUser");
