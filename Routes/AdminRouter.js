@@ -10,7 +10,7 @@ const {
     getDeletedPics, getCombinedLog, getExceptionsLog
 } = require('../Controllers/AdminController');
 const { getReports, deleteReport } = require('../Controllers/ReportController');
-const checkBlockedUsers = require('../Middleware/CheckBlockedUser');
+const {checkBlockedUsers} = require('../Middleware/CheckBlockedUser');
 const { csrfProtection } = require('../Controllers/UserController');
 
 router.use(LogEvents);

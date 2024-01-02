@@ -3,8 +3,8 @@ const router = express.Router();
 const verifyJWT = require("../Middleware/VerifyJWT");
 const { createPost, getAllPostsByID, getPosts, likePost, removeLikePost, deletePost, getPostDetails } = require("../Controllers/PostController");
 const LogEvents = require("../Middleware/LogEvents");
-const checkBlockedUsers = require("../Middleware/CheckBlockedUser");
 const { csrfProtection } = require("../Controllers/UserController");
+const { checkBlockedUsers } = require("../Middleware/CheckBlockedUser");
 
 router.use(verifyJWT);
 router.use(LogEvents);

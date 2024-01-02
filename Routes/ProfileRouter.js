@@ -3,7 +3,7 @@ const router = express.Router();
 const verifyJWT = require("../Middleware/VerifyJWT.JS");
 const { updateProfile, getProfile, updateProfileFailedPic, getMyProfile, clearNotification } = require("../Controllers/ProfileController");
 const LogEvents = require("../Middleware/LogEvents");
-const checkBlockedUsers = require("../Middleware/CheckBlockedUser");
+const {checkBlockedUsers} = require("../Middleware/CheckBlockedUser");
 const { csrfProtection } = require("../Controllers/UserController");
 
 router.use(verifyJWT);

@@ -3,7 +3,7 @@ const router = express.Router();
 const verifyJWT = require("../Middleware/VerifyJWT");
 const { createComment, deleteComment, getComments, getTopComment, getRandomComments, getComment } = require("../Controllers/CommentsController");
 const LogEvents = require("../Middleware/LogEvents");
-const checkBlockedUsers = require("../Middleware/CheckBlockedUser");
+const {checkBlockedUsers} = require("../Middleware/CheckBlockedUser");
 const { csrfProtection } = require("../Controllers/UserController");
 
 router.use(verifyJWT);  
