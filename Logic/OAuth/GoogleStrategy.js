@@ -10,7 +10,7 @@ const { usernameSuggesions, getRandomPassword } = require('../../Logic/helperMet
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: 'http://localhost:3500/user/oauth/google/callback',
+    callbackURL: 'https://mosocial-backend.onrender.com/user/oauth/google/callback',
     passReqToCallback: true
   },
   asyncHandler(async function(request, accessToken, refreshToken, profile, done) {
