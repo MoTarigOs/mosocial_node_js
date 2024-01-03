@@ -8,7 +8,7 @@ const handleRefreshToken = asyncHandler( async (req, res) => {
 
     const refreshToken = req?.cookies?._r_t ? req.cookies._r_t : null;
 
-    if(!refreshToken) return res.status(501).json({ message: "Error with tokens please login to your account" });
+    if(!refreshToken) return res.status(400).json({ message: "Error with tokens please login to your account" });
 
     jwt.verify(
         refreshToken,

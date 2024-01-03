@@ -22,8 +22,8 @@ const csrfProtection = csurf({
         path: "/",
         maxAge: 14400, //in seconds = 4 hours
         httpOnly: true,
-        sameSite: "strict",
-        //secure: true
+        sameSite: "None",
+        secure: true
     },
     value: (req) => req.cookies.csrf_token
 });
@@ -341,7 +341,7 @@ const getUserInfo = asyncHandler( async(req, res) => {
         httpOnly: true,
         path: "/",
         secure: true,
-        sameSite: "strict",
+        sameSite: "None",
         maxAge: 4 * 60 * 60 * 1000
     });
 
