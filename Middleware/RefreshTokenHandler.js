@@ -57,14 +57,14 @@ const handleRefreshToken = asyncHandler( async (req, res) => {
                 res.cookie('_a_t', accessToken, { 
                     path: '/', 
                     httpOnly: true, 
-                    sameSite: 'Strict', 
+                    sameSite: 'None', 
                     secure: true, 
                     maxAge: (5 * 24 * 60 * 60 * 1000)
                 });
                 res.cookie('_r_t', refreshToken, { 
                     path: '/', 
                     httpOnly: true, 
-                    sameSite: 'Strict', 
+                    sameSite: 'None', 
                     secure: true, 
                     maxAge: (30 * 24 * 60 * 60 * 1000)
                 });
